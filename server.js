@@ -11,6 +11,16 @@ app.use(express.json());
 //Routes
 
 
+// GET
+app.get('/users', async (req, res)=> {
+    try {
+        const users = await User.findAll()
+        res.status(200).json(users)
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 
 // create
 app.post('/users', async (req, res) => {
