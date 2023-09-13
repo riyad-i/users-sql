@@ -46,8 +46,19 @@ app.post('/users', async (req, res) => {
 });
 
 
-
-
+//delete
+app.delete('/users/:id', async (req, res) => {
+    try {
+        const user = await User.destroy({
+            where: {
+                id : req.params.id
+            }
+        })
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 
 
