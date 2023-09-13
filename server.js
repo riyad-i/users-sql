@@ -8,6 +8,30 @@ const User = require('./models/User')
 app.use(express.json());
 
 
+//Routes
+
+
+
+// create
+app.post('/users', async (req, res) => {
+    try {
+        const user = await User.create(req.body)
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
 (async function() {
     try {
         //sync function will create a table for each of our models
