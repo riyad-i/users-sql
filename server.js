@@ -3,19 +3,34 @@ const app = express()
 const PORT = 4000
 
 const sequelizeDB = require('./utils/db')
+const User = require('./models/User')
 
-app.use(express.json())
+app.use(express.json());
 
 
-
-app.listen(PORT, async ()=>{
-    console.log(`Server running on port: ${PORT}`);
-
+(async function() {
     try {
-        sequelizeDB.authenticate()
-        console.log('connected');
+        //sync function will create a table for each of our models
+        const result = await sequelizeDB.sync()
+        console.log(result);
+
+        //run server
+        app.listen(PORT, ()=> {`Server running on port: ${PORT}`})
     } catch (error) {
         console.log(error);
     }
+})()
 
-})
+
+
+// app.listen(PORT, async ()=>{
+//     console.log(`Server running on port: ${PORT}`);
+
+//     try {
+//         sequelizeDB.authenticate()
+//         console.log('connected');
+//     } catch (error) {
+//         console.log(error);
+//     }
+
+// })
