@@ -45,6 +45,24 @@ app.post('/users', async (req, res) => {
     }
 });
 
+//put
+app.put('/users/:id', async (req, res)=> {
+    try {
+        const user = await User.update({
+            name: req.body.name,
+            department: req.body.department,
+            salary: req.body.salary
+        }, {
+            where : {
+                id: req.params.id
+            }
+        })
+        res.json(user)
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 
 //delete
 app.delete('/users/:id', async (req, res) => {
