@@ -22,6 +22,19 @@ app.get('/users', async (req, res)=> {
 })
 
 
+
+app.get('/users/:id', async (req, res)=> {
+    try {
+        const user = await User.findByPk(req.params.id)
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+
+
 // create
 app.post('/users', async (req, res) => {
     try {
